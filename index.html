@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI & IT Portfolio Template</title>
+  
+  <!-- INTERACTIVE TYPOGRAPHY IMPORTS (Space Grotesk, Inter, JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================== */
+    /* MASTER CONTROL: NEON STYLE & CSS VARIABLES                  */
+    /* ========================================================== */
+    :root {
+      /* Base Cyber Dark Canvas colors */
+      --bg-darker: #050508;
+      --bg-dark: #09090f;
+      --bg-card: #111018;
+      --bg-card-hover: #151421;
+      --border-color: rgba(255, 255, 255, 0.06);
+      
+      /* Typography */
+      --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* DEFAULT ACCENT SETTING: Cyber-Blue (Cyan) */
+      --accent: #00f0ff;
+      --accent-glow: rgba(0, 240, 255, 0.4);
+      --accent-glow-dense: rgba(0, 240, 255, 0.75);
+      --accent-glow-subtle: rgba(0, 240, 255, 0.08);
+      --text-glow-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    /* VIOLET PRESENCE CLASS */
+    body.accent-violet {
+      --accent: #ab20fd;
+      --accent-glow: rgba(171, 32, 253, 0.4);
+      --accent-glow-dense: rgba(171, 32, 253, 0.75);
+      --accent-glow-subtle: rgba(171, 32, 253, 0.08);
+      --text-glow-shadow: 0 0 10px rgba(171, 32, 253, 0.5);
+    }
+
+    /* EMERALD REVOLUTION CLASS */
+    body.accent-emerald {
+      --accent: #00ff87;
+      --accent-glow: rgba(0, 255, 135, 0.4);
+      --accent-glow-dense: rgba(0, 255, 135, 0.75);
+      --accent-glow-subtle: rgba(0, 255, 135, 0.08);
+      --text-glow-shadow: 0 0 10px rgba(0, 255, 135, 0.5);
+    }
+
+    /* GLOBAL RESET & BASICS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-darker);
+      color: #dfdfe6;
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* SELECTION GLOW */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg-darker);
+    }
+
+    /* SCROLLBAR ACCENTS */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-darker);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-card);
+      border: 2px solid var(--bg-darker);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* LAYOUT FRAME */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-title-wrapper {
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .section-title-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    /* SYSTEM PARTICLES & NETWORK BACKDROP */
+    #neural-backdrop-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .app-wrapper {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ACCENT SWAP PRESET DRAWER HEADER */
+    .accent-controller {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: rgba(17, 16, 24, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 9999px;
+    }
+
+    .accent-pill {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .accent-pill:hover {
+      transform: scale(1.2);
+    }
+
+    .accent-pill.pill-cyan { background-color: #00f0ff; }
+    .accent-pill.pill-violet { background-color: #ab20fd; }
+    .accent-pill.pill-emerald { background-color: #00ff87; }
+
+    .accent-pill.active {
+      border-color: #ffffff;
+      transform: scale(1.1);
+    }
+
+    .accent-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #8c899c;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    /* ========================================================== */
+    /* SECTION SPECIFIC STYLES                                   */
+    /* ========================================================== */
+
+    /* sticky sticky navigation header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(5, 5, 8, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: border-color 0.3s;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .brand-logo {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo span {
+      color: var(--accent);
+      text-shadow: var(--text-glow-shadow);
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .nav-routes {
+      display: flex;
+      gap: 32px;
+      list-style-type: none;
+    }
+
+    .nav-route-item a {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: #a4a2b2;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+
+    .nav-route-item a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .social-link-icon {
+      color: #a4a2b2;
+      transition: color 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .social-link-icon:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .social-link-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* HERO LAYOUT */
+    .hero-section {
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-glow-subtle);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-left: 3px solid var(--accent);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    .hero-pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      animation: core-pulse 1.8s infinite;
+      box-shadow: var(--text-glow-shadow);
+    }
+
+    @keyframes core-pulse {
+      0% { transform: scale(0.9); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.5; }
+    }
+
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: 54px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #ffffff;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-headline span {
+      background: linear-gradient(135deg, #ffffff 50%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+    }
+
+    .hero-sub-subtitle {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--accent);
+      margin-bottom: 24px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hero-bio {
+      font-size: 17px;
+      color: #a4a2b2;
+      margin-bottom: 36px;
+      max-width: 620px;
+    }
+
+    .hero-actions-container {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--accent);
+      color: var(--bg-darker);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow-dense);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      background-color: transparent;
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: 4px;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+      border-color: var(--accent);
+    }
+
+    /* RIGHT COLUMN: HERO PORTRAIT FRAME */
+    .hero-avatar-frame {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 1;
+      justify-self: center;
+    }
+
+    .hero-avatar-border-svg {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: var(--accent);
+      transition: color 0.3s;
+    }
+
+    .hero-avatar-graphic {
+      width: calc(100% - 24px);
+      height: calc(100% - 24px);
+      margin: 12px;
+      border-radius: 8px;
+      background-color: var(--bg-card);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+
+    .hero-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      filter: grayscale(0.2) contrast(1.1);
+      transition: transform 0.4s;
+    }
+
+    .hero-avatar-graphic:hover .hero-avatar-img {
+      transform: scale(1.05);
+    }
+
+    .hero-avatar-overlay-cyber {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(5, 5, 8, 0.9);
+      border: 1px solid var(--accent);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      box-shadow: var(--text-glow-shadow);
+      transition: border-color 0.3s;
+    }
+
+    /* SKILLS MATRIX */
+    .skills-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .skills-layout-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .skills-group-panel {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 32px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .skills-group-panel:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .skills-group-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 650;
+      color: #ffffff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .skills-group-title svg {
+      color: var(--accent);
+      width: 20px;
+      height: 20px;
+      transition: color 0.3s;
+    }
+
+    .skills-matrix-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .skill-metric-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skill-meta-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .skill-name-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: #dfdfe6;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .skill-percentage-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+
+    .skill-progress-bar-track {
+      width: 100%;
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .skill-progress-bar-level {
+      height: 100%;
+      background: linear-gradient(90deg, var(--bg-card) 0%, var(--accent) 100%);
+      width: 0%; /* POPULATED BY JS */
+      border-radius: 9999px;
+      transition: width 1.2s cubic-bezier(0.1, 0.76, 0.55, 0.94), background 0.3s;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* PROJECTS SHOWCASE */
+    .projects-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .projects-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .project-cyber-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 480px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .project-cyber-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .project-thumbnail-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background-color: var(--bg-darker);
+    }
+
+    .project-thumbnail-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: transform 0.4s, opacity 0.4s;
+    }
+
+    .project-cyber-card:hover .project-thumbnail-img {
+      transform: scale(1.04);
+      opacity: 0.95;
+    }
+
+    .project-neon-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 40%, rgba(5, 5, 8, 1) 100%);
+      pointer-events: none;
+    }
+
+    .project-details-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project-tags-rack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .project-tag-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      background-color: var(--accent-glow-subtle);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      padding: 3px 8px;
+      border-radius: 4px;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    .project-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .project-abstract {
+      font-size: 14px;
+      color: #a4a2b2;
+      margin-bottom: 24px;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .project-connections {
+      display: flex;
+      gap: 16px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+    }
+
+    .project-conn-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .project-conn-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .project-conn-btn:hover {
+      color: var(--accent);
+    }
+
+    /* CERTIFICATIONS & ACHIEVEMENTS */
+    .certifications-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .certs-grid-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .cert-cyber-badge {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .cert-cyber-badge:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .cert-scanner-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: sweep-down 4s linear infinite;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    @keyframes sweep-down {
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(300px); opacity: 0; }
+    }
+
+    .cert-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background-color: var(--bg-darker);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .cert-icon-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      filter: grayscale(0.25);
+    }
+
+    .cert-badge-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .cert-issuer-identity {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #8c899c;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .cert-issue-date {
+      font-size: 13px;
+      color: #a4a2b2;
+      margin-bottom: 20px;
+    }
+
+    .cert-verify-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: text-shadow 0.2s, opacity 0.2s;
+    }
+
+    .cert-verify-link:hover {
+      text-shadow: var(--text-glow-shadow);
+      opacity: 0.95;
+    }
+
+    /* TECH BLOG */
+    .tech-blog-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .blog-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .blog-cyber-plate {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      min-height: 260px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .blog-cyber-plate:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .blog-cover-wrapper {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg-darker);
+      height: 100%;
+    }
+
+    .blog-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: transform 0.4s;
+    }
+
+    .blog-cyber-plate:hover .blog-cover-img {
+      transform: scale(1.05);
+    }
+
+    .blog-textual-panel {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .blog-meta-rack {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .blog-category-tag {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+
+    .blog-reading-duration {
+      color: #8c899c;
+    }
+
+    .blog-article-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.35;
+      margin: 12px 0 8px 0;
+    }
+
+    .blog-short-excerpt {
+      font-size: 13.5px;
+      color: #a4a2b2;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .blog-read-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .blog-read-action:hover {
+      color: var(--accent);
+    }
+
+    /* CONTACT SECTION & FORM */
+    .contact-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .contact-layout-split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 80px;
+    }
+
+    .contact-cyber-meta {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-meta-heading {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .contact-meta-desc {
+      font-size: 15px;
+      color: #a4a2b2;
+      margin-bottom: 40px;
+      max-width: 440px;
+    }
+
+    .contact-network-links {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-network-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .contact-network-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: color 0.3s;
+    }
+
+    .contact-network-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #8c899c;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .contact-network-val {
+      font-size: 15px;
+      color: #ffffff;
+    }
+
+    /* CONTACT FORM INPUT FIELDS */
+    .contact-cyber-form-container {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 40px;
+    }
+
+    .contact-form-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-form-double {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .form-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #a4a2b2;
+      letter-spacing: 0.5px;
+    }
+
+    .form-cyber-input, .form-cyber-textarea {
+      background-color: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 4px;
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-cyber-input:focus, .form-cyber-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow-subtle);
+    }
+
+    .form-cyber-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-btn-submit {
+      background-color: var(--accent);
+      color: var(--bg-darker);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 16px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px var(--accent-glow);
+      transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .form-btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow-dense);
+    }
+
+    .form-btn-submit svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s;
+    }
+
+    .form-btn-submit:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ACTION STATES OVERLAYS */
+    .form-sending-overlay {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .cyber-loader {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--accent-glow);
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: core-spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      margin: 0 auto 24px auto;
+    }
+
+    @keyframes core-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .form-success-overlay {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .success-checkmark-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background-color: var(--accent-glow-subtle);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      box-shadow: var(--text-glow-shadow);
+    }
+
+    .success-checkmark-box svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* MASTER FOOTER */
+    .master-footer {
+      padding: 48px 0;
+      background-color: var(--bg-darker);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-divider-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-trademark {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #8c899c;
+    }
+
+    .footer-back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #a4a2b2;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .footer-back-to-top:hover {
+      color: var(--accent);
+    }
+
+    .footer-back-to-top svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ========================================================== */
+    /* RESPONSIVE DESIGN (MEDIA QUERIES)                          */
+    /* ========================================================== */
+    @media (max-width: 1024px) {
+      .skills-layout-grid,
+      .projects-showcase-grid,
+      .certs-grid-layout {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .blog-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-section {
+        padding: 60px 0;
+      }
+
+      .hero-grid {
+        gap: 40px;
+      }
+
+      .hero-headline {
+        font-size: 44px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-routes {
+        display: none; /* COLLAPSED IN MOBILE IN FAVOR OF ELEGANT SCROLL ACCELERATORS */
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-status-pill {
+        justify-content: center;
+      }
+
+      .hero-headline {
+        font-size: 38px;
+      }
+
+      .hero-bio {
+        margin: 0 auto 32px auto;
+      }
+
+      .hero-actions-container {
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .skills-layout-grid,
+      .projects-showcase-grid,
+      .certs-grid-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-cyber-plate {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-layout-split {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .contact-cyber-form-container {
+        padding: 24px;
+      }
+
+      .contact-form-double {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-divider-container {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body class="theme-default">
+
+<!-- ============================================== -->
+<!-- USER INFORMATION MANUAL & CONTROL OVERVIEW    -->
+<!-- ============================================== -->
+<!--
+  INSTRUCTIONS FOR THE BEGINNER / DESIGNER:
+  
+  This is a fully self-contained cyberpunk dark-mode portfolio template.
+  To customize this website with your own information, follow these simple steps:
+  
+  1. Open your code editor and use 'Ctrl+F' (or 'Cmd+F' on Mac).
+  2. Search for the word "INSERT" to locate every customizable data spot.
+  3. Replace the bracketed placeholder tag (e.g. [INSERT_YOUR_FULL_NAME_HERE])
+     with your own text or configuration values.
+  4. Save the file and reload your browser window!
+  
+  Enjoy building!
+-->
+
+<canvas id="neural-backdrop-canvas"></canvas>
+
+<div class="app-wrapper">
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: NAVIGATION & LOGO   -->
+  <!-- ========================================== -->
+  <header class="sticky-header" id="nav-header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" id="logo-anchor">
+        <span>&lt;/&gt;</span> [INSERT_YOUR_INITIALS_OR_LOGO_TEXT_HERE]
+      </a>
+      
+      <nav>
+        <ul class="nav-routes">
+          <li class="nav-route-item"><a href="#about">[INSERT_NAV_ITEM_ABOUT_TEXT_HERE]</a></li>
+          <li class="nav-route-item"><a href="#skills">[INSERT_NAV_ITEM_SKILLS_TEXT_HERE]</a></li>
+          <li class="nav-route-item"><a href="#projects">[INSERT_NAV_ITEM_PROJECTS_TEXT_HERE]</a></li>
+          <li class="nav-route-item"><a href="#certifications">[INSERT_NAV_ITEM_CERTIFICATIONS_TEXT_HERE]</a></li>
+          <li class="nav-route-item"><a href="#blog">[INSERT_NAV_ITEM_BLOG_TEXT_HERE]</a></li>
+          <li class="nav-route-item"><a href="#contact">[INSERT_NAV_ITEM_CONTACT_TEXT_HERE]</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Interactive Theme Preset Badges -->
+        <div class="accent-controller" title="Switch Accent Palette">
+          <div class="accent-pill pill-cyan active" data-accent="default"></div>
+          <div class="accent-pill pill-violet" data-accent="violet"></div>
+          <div class="accent-pill pill-emerald" data-accent="emerald"></div>
+          <span class="accent-label" id="current-accent-label">CYAN</span>
+        </div>
+
+        <a href="[INSERT_YOUR_GITHUB_URL_HERE]" class="social-link-icon" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="[INSERT_YOUR_LINKEDIN_URL_HERE]" class="social-link-icon" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="[INSERT_YOUR_TWITTER_OR_X_URL_HERE]" class="social-link-icon" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: HERO & BIOGRAPHY    -->
+  <!-- ========================================== -->
+  <section class="hero-section" id="about">
+    <div class="container hero-grid">
+      
+      <div class="hero-content">
+        <div class="hero-status-pill">
+          <span class="hero-pulse-dot"></span>
+          <span>[INSERT_STATUS_LABEL_HERE]: <strong>[INSERT_STATUS_VALUE_HERE]</strong></span>
+        </div>
+        
+        <h1 class="hero-headline">
+          <span>[INSERT_HERO_WELCOME_TEXT_HERE]</span>
+          [INSERT_YOUR_FULL_NAME_HERE]
+        </h1>
+        
+        <div class="hero-sub-subtitle">[INSERT_YOUR_PROFESSIONAL_TITLE_HERE]</div>
+        
+        <p class="hero-bio">
+          [INSERT_YOUR_DETAILED_HERO_BIO_HERE]
+        </p>
+        
+        <div class="hero-actions-container">
+          <a href="[INSERT_PRIMARY_CALL_TO_ACTION_LINK_HERE]" class="btn-primary">
+            [INSERT_PRIMARY_CALL_TO_ACTION_TEXT_HERE]
+          </a>
+          <a href="[INSERT_YOUR_RESUME_DOWNLOAD_LINK_HERE]" class="btn-secondary">
+            [INSERT_YOUR_RESUME_DOWNLOAD_BUTTON_TEXT_HERE]
+          </a>
+        </div>
+      </div>
+      
+      <div class="hero-avatar-frame">
+        <svg class="hero-avatar-border-svg" viewBox="0 0 400 400" fill="none">
+          <rect x="8" y="8" width="384" height="384" rx="12" stroke="currentColor" stroke-width="2" stroke-dasharray="24 12" />
+          <path d="M8 40 L40 8 M400 360 L360 400 M8 360 L40 400 M400 40 L360 8" stroke="currentColor" stroke-width="2" />
+        </svg>
+        <div class="hero-avatar-graphic">
+          <img class="hero-avatar-img" src="[INSERT_YOUR_PROFILE_PORTRAIT_IMAGE_URL_HERE]" alt="[INSERT_YOUR_FULL_NAME_HERE]" referrerPolicy="no-referrer" />
+          <div class="hero-avatar-overlay-cyber">[INSERT_YOUR_CORE_SPECIALIZATION_HERE]</div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: SKILLS MATRIX       -->
+  <!-- ========================================== -->
+  <section class="skills-section" id="skills">
+    <div class="container">
+      
+      <div class="section-title-wrapper">
+        <span class="section-title-tag">Engine Components</span>
+        <h2 class="section-title">Skills Matrix</h2>
+      </div>
+      
+      <div class="skills-layout-grid">
+        
+        <!-- Skill Panel 1 -->
+        <div class="skills-group-panel">
+          <h3 class="skills-group-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            [INSERT_SKILL_GROUP_1_TITLE_HERE]
+          </h3>
+          <div class="skills-matrix-list">
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT1_SKILL1_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT1_SKILL1_PROGRESS_PERCENT_E_G_90_HERE]">[INSERT_SKILLS_CAT1_SKILL1_PROGRESS_PERCENT_E_G_90_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT1_SKILL2_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT1_SKILL2_PROGRESS_PERCENT_E_G_80_HERE]">[INSERT_SKILLS_CAT1_SKILL2_PROGRESS_PERCENT_E_G_80_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT1_SKILL3_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT1_SKILL3_PROGRESS_PERCENT_E_G_85_HERE]">[INSERT_SKILLS_CAT1_SKILL3_PROGRESS_PERCENT_E_G_85_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Panel 2 -->
+        <div class="skills-group-panel">
+          <h3 class="skills-group-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            [INSERT_SKILL_GROUP_2_TITLE_HERE]
+          </h3>
+          <div class="skills-matrix-list">
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT2_SKILL1_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT2_SKILL1_PROGRESS_PERCENT_E_G_75_HERE]">[INSERT_SKILLS_CAT2_SKILL1_PROGRESS_PERCENT_E_G_75_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT2_SKILL2_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT2_SKILL2_PROGRESS_PERCENT_E_G_90_HERE]">[INSERT_SKILLS_CAT2_SKILL2_PROGRESS_PERCENT_E_G_90_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT2_SKILL3_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT2_SKILL3_PROGRESS_PERCENT_E_G_85_HERE]">[INSERT_SKILLS_CAT2_SKILL3_PROGRESS_PERCENT_E_G_85_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Panel 3 -->
+        <div class="skills-group-panel">
+          <h3 class="skills-group-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
+            [INSERT_SKILL_GROUP_3_TITLE_HERE]
+          </h3>
+          <div class="skills-matrix-list">
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT3_SKILL1_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT3_SKILL1_PROGRESS_PERCENT_E_G_85_HERE]">[INSERT_SKILLS_CAT3_SKILL1_PROGRESS_PERCENT_E_G_85_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT3_SKILL2_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT3_SKILL2_PROGRESS_PERCENT_E_G_80_HERE]">[INSERT_SKILLS_CAT3_SKILL2_PROGRESS_PERCENT_E_G_80_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+            <div class="skill-metric-item">
+              <div class="skill-meta-info">
+                <span class="skill-name-label">[INSERT_SKILLS_CAT3_SKILL3_NAME_HERE]</span>
+                <span class="skill-percentage-tag" data-value="[INSERT_SKILLS_CAT3_SKILL3_PROGRESS_PERCENT_E_G_95_HERE]">[INSERT_SKILLS_CAT3_SKILL3_PROGRESS_PERCENT_E_G_95_HERE]%</span>
+              </div>
+              <div class="skill-progress-bar-track">
+                <div class="skill-progress-bar-level"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: PROJECTS SHOWCASE   -->
+  <!-- ========================================== -->
+  <section class="projects-section" id="projects">
+    <div class="container">
+      
+      <div class="section-title-wrapper">
+        <span class="section-title-tag">System Builds</span>
+        <h2 class="section-title">Projects Showcase</h2>
+      </div>
+      
+      <div class="projects-showcase-grid">
+        
+        <!-- Project Card 1 -->
+        <article class="project-cyber-card">
+          <div class="project-thumbnail-wrapper">
+            <img class="project-thumbnail-img" src="[INSERT_PROJECT_1_IMAGE_URL_HERE]" alt="[INSERT_PROJECT_1_TITLE_HERE]" referrerPolicy="no-referrer" />
+            <div class="project-neon-overlay"></div>
+          </div>
+          <div class="project-details-body">
+            <div class="project-tags-rack">
+              <span class="project-tag-pill">[INSERT_PROJECT_1_TAG_1_HERE]</span>
+              <span class="project-tag-pill">[INSERT_PROJECT_1_TAG_2_HERE]</span>
+              <span class="project-tag-pill">[INSERT_PROJECT_1_TAG_3_HERE]</span>
+            </div>
+            <h3 class="project-title">[INSERT_PROJECT_1_TITLE_HERE]</h3>
+            <p class="project-abstract">
+              [INSERT_PROJECT_1_DESCRIPTION_HERE]
+            </p>
+            <div class="project-connections">
+              <a href="[INSERT_PROJECT_1_LIVE_DEMO_URL_HERE]" class="project-conn-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                Demo
+              </a>
+              <a href="[INSERT_PROJECT_1_SOURCE_CODE_URL_HERE]" class="project-conn-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project Card 2 -->
+        <article class="project-cyber-card">
+          <div class="project-thumbnail-wrapper">
+            <img class="project-thumbnail-img" src="[INSERT_PROJECT_2_IMAGE_URL_HERE]" alt="[INSERT_PROJECT_2_TITLE_HERE]" referrerPolicy="no-referrer" />
+            <div class="project-neon-overlay"></div>
+          </div>
+          <div class="project-details-body">
+            <div class="project-tags-rack">
+              <span class="project-tag-pill">[INSERT_PROJECT_2_TAG_1_HERE]</span>
+              <span class="project-tag-pill">[INSERT_PROJECT_2_TAG_2_HERE]</span>
+              <span class="project-tag-pill">[INSERT_PROJECT_2_TAG_3_HERE]</span>
+            </div>
+            <h3 class="project-title">[INSERT_PROJECT_2_TITLE_HERE]</h3>
+            <p class="project-abstract">
+              [INSERT_PROJECT_2_DESCRIPTION_HERE]
+            </p>
+            <div class="project-connections">
+              <a href="[INSERT_PROJECT_2_LIVE_DEMO_URL_HERE]" class="project-conn-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                Demo
+              </a>
+              <a href="[INSERT_PROJECT_2_SOURCE_CODE_URL_HERE]" class="project-conn-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project Card 3 -->
+        <article class="project-cyber-card">
+          <div class="project-thumbnail-wrapper">
+            <img class="project-thumbnail-img" src="[INSERT_PROJECT_3_IMAGE_URL_HERE]" alt="[INSERT_PROJECT_3_TITLE_HERE]" referrerPolicy="no-referrer" />
+            <div class="project-neon-overlay"></div>
+          </div>
+          <div class="project-details-body">
+            <div class="project-tags-rack">
+              <span class="project-tag-pill">[INSERT_PROJECT_3_TAG_1_HERE]</span>
+              <span class="project-tag-pill">[INSERT_PROJECT_3_TAG_2_HERE]</span>
+              <span class="project-tag-pill">[INSERT_PROJECT_3_TAG_3_HERE]</span>
+            </div>
+            <h3 class="project-title">[INSERT_PROJECT_3_TITLE_HERE]</h3>
+            <p class="project-abstract">
+              [INSERT_PROJECT_3_DESCRIPTION_HERE]
+            </p>
+            <div class="project-connections">
+              <a href="[INSERT_PROJECT_3_LIVE_DEMO_URL_HERE]" class="project-conn-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                Demo
+              </a>
+              <a href="[INSERT_PROJECT_3_SOURCE_CODE_URL_HERE]" class="project-conn-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: CERTIFICATIONS      -->
+  <!-- ========================================== -->
+  <section class="certifications-section" id="certifications">
+    <div class="container">
+      
+      <div class="section-title-wrapper">
+        <span class="section-title-tag">Protocol Clearance</span>
+        <h2 class="section-title">Certifications & Achievements</h2>
+      </div>
+      
+      <div class="certs-grid-layout">
+        
+        <!-- Cert 1 -->
+        <div class="cert-cyber-badge">
+          <div class="cert-scanner-line"></div>
+          <div class="cert-icon-wrapper">
+            <img class="cert-icon-img" src="[INSERT_CERT_1_BADGE_IMAGE_URL_HERE]" alt="Badge 1" referrerPolicy="no-referrer" />
+          </div>
+          <h3 class="cert-badge-title">[INSERT_CERT_1_TITLE_HERE]</h3>
+          <div class="cert-issuer-identity">[INSERT_CERT_1_ISSUER_NAME_HERE]</div>
+          <div class="cert-issue-date">Completed: <strong>[INSERT_CERT_1_COMPLETION_DATE_HERE]</strong></div>
+          <a class="cert-verify-link" href="[INSERT_CERT_1_VERIFICATION_URL_HERE]" target="_blank" rel="noopener">
+            Verify Protocol
+          </a>
+        </div>
+
+        <!-- Cert 2 -->
+        <div class="cert-cyber-badge">
+          <div class="cert-scanner-line"></div>
+          <div class="cert-icon-wrapper">
+            <img class="cert-icon-img" src="[INSERT_CERT_2_BADGE_IMAGE_URL_HERE]" alt="Badge 2" referrerPolicy="no-referrer" />
+          </div>
+          <h3 class="cert-badge-title">[INSERT_CERT_2_TITLE_HERE]</h3>
+          <div class="cert-issuer-identity">[INSERT_CERT_2_ISSUER_NAME_HERE]</div>
+          <div class="cert-issue-date">Completed: <strong>[INSERT_CERT_2_COMPLETION_DATE_HERE]</strong></div>
+          <a class="cert-verify-link" href="[INSERT_CERT_2_VERIFICATION_URL_HERE]" target="_blank" rel="noopener">
+            Verify Protocol
+          </a>
+        </div>
+
+        <!-- Cert 3 -->
+        <div class="cert-cyber-badge">
+          <div class="cert-scanner-line"></div>
+          <div class="cert-icon-wrapper">
+            <img class="cert-icon-img" src="[INSERT_CERT_3_BADGE_IMAGE_URL_HERE]" alt="Badge 3" referrerPolicy="no-referrer" />
+          </div>
+          <h3 class="cert-badge-title">[INSERT_CERT_3_TITLE_HERE]</h3>
+          <div class="cert-issuer-identity">[INSERT_CERT_3_ISSUER_NAME_HERE]</div>
+          <div class="cert-issue-date">Completed: <strong>[INSERT_CERT_3_COMPLETION_DATE_HERE]</strong></div>
+          <a class="cert-verify-link" href="[INSERT_CERT_3_VERIFICATION_URL_HERE]" target="_blank" rel="noopener">
+            Verify Protocol
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: TECH BLOG           -->
+  <!-- ========================================== -->
+  <section class="tech-blog-section" id="blog">
+    <div class="container">
+      
+      <div class="section-title-wrapper">
+        <span class="section-title-tag">Transmitted Logs</span>
+        <h2 class="section-title">Tech Blog</h2>
+      </div>
+      
+      <div class="blog-cards-grid">
+        
+        <!-- Blog Panel 1 -->
+        <article class="blog-cyber-plate">
+          <div class="blog-cover-wrapper">
+            <img class="blog-cover-img" src="[INSERT_BLOG_POST_1_IMAGE_URL_HERE]" alt="Blog Post 1" referrerPolicy="no-referrer" />
+          </div>
+          <div class="blog-textual-panel">
+            <div>
+              <div class="blog-meta-rack">
+                <span class="blog-category-tag">[INSERT_BLOG_POST_1_CATEGORY_HERE]</span>
+                <span class="blog-reading-duration">[INSERT_BLOG_POST_1_READ_TIME_IN_MINUTES_HERE] MIN READ</span>
+              </div>
+              <h3 class="blog-article-title">[INSERT_BLOG_POST_1_TITLE_HERE]</h3>
+              <p class="blog-short-excerpt">
+                [INSERT_BLOG_POST_1_EXCERPT_TEXT_HERE]
+              </p>
+            </div>
+            <div class="blog-meta-rack">
+              <span class="blog-reading-duration">[INSERT_BLOG_POST_1_DATE_HERE]</span>
+              <a href="[INSERT_BLOG_POST_1_ARTICLE_LINK_URL_HERE]" class="blog-read-action">
+                Read Log
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Blog Panel 2 -->
+        <article class="blog-cyber-plate">
+          <div class="blog-cover-wrapper">
+            <img class="blog-cover-img" src="[INSERT_BLOG_POST_2_IMAGE_URL_HERE]" alt="Blog Post 2" referrerPolicy="no-referrer" />
+          </div>
+          <div class="blog-textual-panel">
+            <div>
+              <div class="blog-meta-rack">
+                <span class="blog-category-tag">[INSERT_BLOG_POST_2_CATEGORY_HERE]</span>
+                <span class="blog-reading-duration">[INSERT_BLOG_POST_2_READ_TIME_IN_MINUTES_HERE] MIN READ</span>
+              </div>
+              <h3 class="blog-article-title">[INSERT_BLOG_POST_2_TITLE_HERE]</h3>
+              <p class="blog-short-excerpt">
+                [INSERT_BLOG_POST_2_EXCERPT_TEXT_HERE]
+              </p>
+            </div>
+            <div class="blog-meta-rack">
+              <span class="blog-reading-duration">[INSERT_BLOG_POST_2_DATE_HERE]</span>
+              <a href="[INSERT_BLOG_POST_2_ARTICLE_LINK_URL_HERE]" class="blog-read-action">
+                Read Log
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: CONTACT             -->
+  <!-- ========================================== -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-layout-split">
+      
+      <div class="contact-cyber-meta">
+        <div>
+          <span class="section-title-tag">System Interface</span>
+          <h2 class="contact-meta-heading">[INSERT_CONTACT_INFO_TITLE_HERE]</h2>
+          <p class="contact-meta-desc">
+            [INSERT_CONTACT_INFO_SUBTITLE_HERE]
+          </p>
+        </div>
+        
+        <div class="contact-network-links">
+          <div class="contact-network-item">
+            <div class="contact-network-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <div>
+              <div class="contact-network-label">Secure Node</div>
+              <div class="contact-network-val">[INSERT_YOUR_PUBLIC_EMAIL_ADDRESS_HERE]</div>
+            </div>
+          </div>
+          <div class="contact-network-item">
+            <div class="contact-network-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2zm1 14H11V10H13v6zm0-8H11V6H13v2z"/></svg>
+            </div>
+            <div>
+              <div class="contact-network-label">Chronos Area</div>
+              <div class="contact-network-val">[INSERT_YOUR_CURRENT_PHYSICAL_LOCATION_OR_TIMEZONE_HERE]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-cyber-form-container">
+        <!-- Main Form -->
+        <form class="contact-form-flow" id="contact-form" action="[INSERT_YOUR_CONTACT_FORM_SUBMIT_CALLBACK_URL_OR_WEBHOOK_IF_ANY_HERE]" method="POST">
+          <div class="contact-form-double">
+            <div class="form-field-group">
+              <label class="form-field-label">Subject Identity</label>
+              <input type="text" id="form-name" class="form-cyber-input" placeholder="Initiate Name..." required />
+            </div>
+            <div class="form-field-group">
+              <label class="form-field-label">Callback Route</label>
+              <input type="email" id="form-email" class="form-cyber-input" placeholder="Initiate Email..." required />
+            </div>
+          </div>
+          
+          <div class="form-field-group">
+            <label class="form-field-label">Transmission Goal</label>
+            <input type="text" id="form-subject" class="form-cyber-input" placeholder="Initiate Subject..." required />
+          </div>
+          
+          <div class="form-field-group">
+            <label class="form-field-label">Encrypted Message</label>
+            <textarea id="form-message" class="form-cyber-textarea" placeholder="Enter transmission payloads..." required></textarea>
+          </div>
+          
+          <button type="submit" class="form-btn-submit">
+            <span>Transmit Message</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+
+        <!-- Sending loader -->
+        <div class="form-sending-overlay" id="form-sending">
+          <div class="cyber-loader"></div>
+          <h3 class="contact-meta-heading" style="font-size: 20px; margin-bottom: 8px;">Transmitting Packets</h3>
+          <p class="contact-network-label">Syncing secure connection with recipient host...</p>
+        </div>
+
+        <!-- Success overlay -->
+        <div class="form-success-overlay" id="form-success">
+          <div class="success-checkmark-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3 class="contact-meta-heading" style="font-size: 22px; color: var(--accent); margin-bottom: 8px;">Packet Delivered</h3>
+          <p class="contact-meta-desc" style="font-size: 14px; margin-bottom: 24px; margin-left: auto; margin-right: auto;">
+            Secure routing confirmed. Transmission has been buffered into the recipient terminal backlog.
+          </p>
+          <button type="button" class="btn-secondary" id="form-reset-btn" style="padding: 10px 24px;">Re-Open Terminal</button>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- USER EDITABLE SECTION: FOOTER              -->
+  <!-- ========================================== -->
+  <footer class="master-footer">
+    <div class="container footer-divider-container">
+      <div class="footer-trademark">
+        &copy; 1970 - 2026 [INSERT_YOUR_COPYRIGHT_HOLDER_NAME_HERE]. System logs active.
+      </div>
+      <a href="#nav-header" class="footer-back-to-top">
+        Return to ceiling
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- INTERACTIVE NEURAL NETWORKS & BACKDROP CANVAS LOGIC -->
+<script>
+  /* ========================================================== */
+  /* SYSTEM INITIALIZATION & CANVAS DRIVER                      */
+  /* ========================================================== */
+  const canvas = document.getElementById("neural-backdrop-canvas");
+  const ctx = canvas.getContext("2d");
+
+  let points = [];
+  const maxPoints = 55;
+  const connectionRadius = 130;
+  let mouse = { x: null, y: null };
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initPoints();
+  }
+
+  function initPoints() {
+    points = [];
+    for (let i = 0; i < maxPoints; i++) {
+      points.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 2 + 1
+      });
+    }
+  }
+
+  function getAccentColor() {
+    const style = getComputedStyle(document.documentElement);
+    return style.getPropertyValue('--accent').trim();
+  }
+
+  function computeConnectionsAndMove() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const accentColor = getAccentColor();
+
+    for (let i = 0; i < points.length; i++) {
+      let p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Bounce limits
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+      // Draw point
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = accentColor;
+      ctx.fill();
+
+      // Mouse draw connection
+      if (mouse.x !== null && mouse.y !== null) {
+        let dx = p.x - mouse.x;
+        let dy = p.y - mouse.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 185) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = accentColor;
+          ctx.lineWidth = (1 - dist / 185) * 0.25;
+          ctx.stroke();
+        }
+      }
+
+      // Mutual links
+      for (let j = i + 1; j < points.length; j++) {
+        let p2 = points[j];
+        let dx = p.x - p2.x;
+        let dy = p.y - p2.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < connectionRadius) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = accentColor;
+          ctx.lineWidth = (1 - dist / connectionRadius) * 0.18;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(computeConnectionsAndMove);
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  window.addEventListener("mouseleave", () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  resizeCanvas();
+  computeConnectionsAndMove();
+
+  /* ========================================================== */
+  /* SECTIONS INITIATION (VISIBLE PERCENTAGE ANIMATOR)           */
+  /* ========================================================== */
+  const skillBarLevels = document.querySelectorAll('.skill-progress-bar-level');
+  
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const percentageTag = entry.target.parentElement.previousElementSibling.querySelector('.skill-percentage-tag');
+        const percentageVal = percentageTag.getAttribute('data-value');
+        entry.target.style.width = percentageVal + '%';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  skillBarLevels.forEach(bar => {
+    skillObserver.observe(bar);
+  });
+
+  /* ========================================================== */
+  /* ACCENT COLOR SYSTEM CODES                                  */
+  /* ========================================================== */
+  const accentPills = document.querySelectorAll('.accent-pill');
+  const accentLabelStr = document.getElementById('current-accent-label');
+
+  accentPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      // Deactivate all active pills
+      accentPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const choice = pill.getAttribute('data-accent');
+
+      // Clear previous classes
+      document.body.classList.remove('accent-violet', 'accent-emerald');
+
+      if (choice === 'violet') {
+        document.body.classList.add('accent-violet');
+        accentLabelStr.textContent = 'VIOLET';
+      } else if (choice === 'emerald') {
+        document.body.classList.add('accent-emerald');
+        accentLabelStr.textContent = 'EMERALD';
+      } else {
+        accentLabelStr.textContent = 'CYAN';
+      }
+    });
+  });
+
+  /* ========================================================== */
+  /* SECURE FORM TRADING UTILITIES                              */
+  /* ========================================================== */
+  const contactForm = document.getElementById('contact-form');
+  const formSending = document.getElementById('form-sending');
+  const formSuccess = document.getElementById('form-success');
+  const resetButton = document.getElementById('form-reset-btn');
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Hide standard layout inputs slowly
+    contactForm.style.display = 'none';
+    formSending.style.display = 'block';
+
+    // Simulate network telemetry latency
+    setTimeout(() => {
+      formSending.style.display = 'none';
+      formSuccess.style.display = 'block';
+    }, 1800);
+  });
+
+  resetButton.addEventListener('click', () => {
+    formSuccess.style.display = 'none';
+    contactForm.reset();
+    contactForm.style.display = 'flex';
+  });
+</script>
+
+</body>
+</html>
